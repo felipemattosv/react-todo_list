@@ -3,7 +3,7 @@ import { VStack, StackDivider } from '@chakra-ui/react'
 import { useState, useEffect } from 'react'
 
 interface IProps {
-    messageList: String[];
+    messageList: string[];
 }
 
 export const TasksList: React.FC<IProps> = (props) => {
