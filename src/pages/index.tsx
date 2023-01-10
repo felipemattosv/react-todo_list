@@ -10,14 +10,14 @@ const messages: string[] = [];
 
 const Home: NextPage = () => {
 
-  const [msg,setMsg] = useState('');
+  const [msgUpdate,setMsg] = useState('');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
 
-            console.log((event.target as HTMLInputElement).value);
-
-            setMsg((event.target as HTMLInputElement).value);
+            let msg = (event.target as HTMLInputElement).value;
+            
+            setMsg(msg);
 
             if (msg !== "") {
               

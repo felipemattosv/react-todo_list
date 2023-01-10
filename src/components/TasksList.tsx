@@ -15,7 +15,7 @@ export const TasksList: React.FC<IProps> = (props) => {
         setTasks(props.messageList);
         console.log(tasks);
 
-    }, [tasks]);
+    });
 
     return(
         <VStack
