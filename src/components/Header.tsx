@@ -1,6 +1,26 @@
-export function Header() {
+import { Flex, Spacer, Text, IconButton } from "@chakra-ui/react"
+import { SunIcon } from "@chakra-ui/icons"
 
+export function Header() {
     return(
-        <h1>Header: Logo e o botao de Dark Theme</h1>
+        <Flex align="center">
+            <Text
+                as='b'
+                fontSize='4xl'
+            >
+                T    O    D    O
+            </Text>
+            <Spacer />
+            <IconButton
+                aria-label='Switch Theme'
+                icon={<SunIcon />}
+                bg="transparent"
+                size="lg"
+                variant="ghost"
+                _hover={{
+                    bg: "transparent"
+                }}
+            />
+        </Flex>
     )
 }

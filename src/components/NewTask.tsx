@@ -13,8 +13,8 @@ export function NewTask() {
             }}
             size="lg"
             padding="3"
-            mt="6"
-            mb="4"
+            mt="8"
+            mb="6"
             shadow="lg"
             borderRadius="3"
         />
