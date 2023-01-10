@@ -1,10 +1,19 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import type { NextPage } from "next";
+import { Header } from '../components/Header'
+import { NewTask } from "../components/NewTask";
+import { TasksList } from "../components/TasksList"
+import { Footer } from "../components/Footer";
 
 const Home: NextPage = () => {
   return (
-    <Flex h="100vh" justifyContent="center" alignItems="center">
-      <Text>Este é o template de React para CT Junior, criado em 2022</Text>
+    <Flex h="100vh" justify="center" align="center">
+      <Flex width="100%" maxWidth={360} direction="column">
+        <Header />
+        <NewTask />
+        <TasksList />
+        <Footer />
+      </Flex>
     </Flex>
   );
 };
