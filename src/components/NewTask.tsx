@@ -1,6 +1,12 @@
 import { Input } from '@chakra-ui/react'
+import React from 'react';
 
-export function NewTask() {
+interface IProps {
+    onKeyDown: (e: any) => void;
+}
+
+export const NewTask: React.FC<IProps> = (props) => {
+    
     return(
         <Input
             type='text'
@@ -17,7 +23,7 @@ export function NewTask() {
             mb="6"
             shadow="lg"
             borderRadius="3"
+            onKeyDown = { props.onKeyDown }
         />
     )
 }
-
