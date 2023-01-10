@@ -6,23 +6,32 @@ import { TasksList } from "../components/TasksList"
 import { Footer } from "../components/Footer";
 import { useState } from 'react'
 
+const messages: string[] = [];
+
 const Home: NextPage = () => {
 
-  const [msg,updateMsg] = useState('');
+  const [msg,setMsg] = useState('');
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
+
             console.log((event.target as HTMLInputElement).value);
-            updateMsg((event.target as HTMLInputElement).value);
-    }
-  };
+
+            setMsg((event.target as HTMLInputElement).value);
+
+            if (msg !== "") {
+              
+              messages.push(msg);
+            }
+        }
+    };
 
   return (
     <Flex h="100vh" justify="center" align="center" flexDir='column'>
       <Flex width="100%" maxWidth={360} direction="column">
         <Header />
         <NewTask onKeyDown={handleKeyDown}/>
-        <TasksList />
+        <TasksList messageList={messages}/>
         <Footer />
       </Flex>
     </Flex>

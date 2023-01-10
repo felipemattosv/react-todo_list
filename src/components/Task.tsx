@@ -1,7 +1,10 @@
 import { Checkbox } from "@chakra-ui/react"
 
+interface TaskProps {
+    name: String;
+}
 
-export function Task() {
+export function Task(props: TaskProps) {
     return (
         <Checkbox
         bg="gray.700"
@@ -9,7 +12,7 @@ export function Task() {
         spacing='1rem'
         color="gray.50"
         >
-            Task 1
+            {props.name}
         </Checkbox>
     )
 }
