@@ -23,8 +23,8 @@ export const TasksList: React.FC<IProps> = (props) => {
         spacing={0}
         align='stretch'
         >
-           {tasks.map(task => {
-                    return <Task name={task} />
+           {tasks.map((task,index) => {
+                    return <Task name={task} key={ index } />
                 })}
         
         </VStack>
