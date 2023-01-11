@@ -3,6 +3,7 @@ import { Checkbox } from "@chakra-ui/react"
 interface TaskProps {
     name: String;
     id: string;
+    onChange: (e: any) => void;
 }
 
 export function Task(props: TaskProps) {
@@ -13,6 +14,7 @@ export function Task(props: TaskProps) {
         spacing='1rem'
         color="gray.50"
         id = {props.id}
+        onChange={ props.onChange }
         >
             {props.name}
         </Checkbox>

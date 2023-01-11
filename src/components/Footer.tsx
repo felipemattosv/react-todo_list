@@ -1,6 +1,10 @@
 import { Flex, Divider, Text, Button } from "@chakra-ui/react" 
 
-export function Footer() {
+interface FooterProps {
+    itemsLeft: number;
+}
+
+export function Footer(props: FooterProps) {
     return(
         <Flex
             flexDir='column'
@@ -9,7 +13,7 @@ export function Footer() {
         >
             <Divider colorScheme="gray.200"/>
             <Flex align="center" justify="space-between">
-                <Text padding="2" fontSize="12">X items left</Text>
+                <Text padding="2" fontSize="12">{ props.itemsLeft } items left</Text>
                 <Flex justify="space-between">
                     <Button fontSize="10" variant='unstyled' >All</Button>
                     <Button fontSize="10" variant='unstyled' >Active</Button>
