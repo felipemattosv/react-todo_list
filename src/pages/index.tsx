@@ -59,9 +59,9 @@ const Home: NextPage = () => {
 
   } //Fim da verificação da CheckBox
 
-  const handleClick = (event: React.PointerEvent) => {
+  const handleClick = (event: React.PointerEvent) => { //Verificação do clique do botão
     let targetBtn = (event.target as HTMLButtonElement).id;
-    if(targetBtn==="allBtn"){
+    if(targetBtn==="allBtn"){ //Verificação se o botão "All" foi clicado
       setMsg(messagesTotal);
       checked = [];
 
@@ -74,7 +74,7 @@ const Home: NextPage = () => {
       }
       setChecked(checked);
 
-    }else if(targetBtn==="activeBtn"){
+    }else if(targetBtn==="activeBtn"){ //Verificação se o botão "Active" foi clicado
 
       setMsg(messagesUnchecked);
       checked = [];
@@ -84,7 +84,7 @@ const Home: NextPage = () => {
       }
       setChecked(checked);
 
-    }else if(targetBtn==="completedBtn"){
+    }else if(targetBtn==="completedBtn"){ //Verificação se o botão "Completed" foi clicado
       setMsg(messagesChecked);
       checked = [];
       
@@ -93,7 +93,7 @@ const Home: NextPage = () => {
       }
       setChecked(checked);
 
-    }else if(targetBtn==="clearBtn"){
+    }else if(targetBtn==="clearBtn"){ //Verificação se o botão "Clear completed" foi clicado
       messagesUnchecked = messagesTotal;
       messagesChecked = [];
       setMsg(messagesTotal)
