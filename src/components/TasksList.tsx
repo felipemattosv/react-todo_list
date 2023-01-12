@@ -25,11 +25,17 @@ export const TasksList: React.FC<IProps> = (props) => {
 
             tasksTemp.push({"taskName": props.messageList[i], "isChecked": props.checked[i]});
         }
-        
-        console.log(tasks);
+
+        console.log(tasksTemp);
+
+        if (tasksTemp[tasksTemp.length - 1]?.taskName === tasksTemp[tasksTemp.length - 2]?.taskName) {
+
+            tasksTemp.splice(-1, 1);
+        }
 
         setTasks(tasksTemp);
-    });
+
+    }, [props]);
 
     
     return(

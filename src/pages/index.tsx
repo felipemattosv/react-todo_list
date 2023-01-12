@@ -24,10 +24,14 @@ const Home: NextPage = () => {
           let msg = (event.target as HTMLInputElement).value;
           
           if (msg !== "" && !msgUpdate.includes(msg)) {
+            
+            checked.push(false);
+            
             messagesTotal.push(msg);
             messagesUnchecked.push(msg);
             setMsg(messagesTotal);
             setCompleted(completed+1);
+            setChecked(checked);
           }
       }
   }
