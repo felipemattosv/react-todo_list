@@ -103,6 +103,7 @@ const Home: NextPage = () => {
         checked.push(false);
       }
       setChecked(checked);
+      setCompleted(messagesTotal.length);
     }
   }
     

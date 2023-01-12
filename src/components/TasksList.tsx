@@ -15,8 +15,8 @@ export const TasksList: React.FC<IProps> = (props) => {
 
     useEffect(() => {
 
-        setTasks(props.messageList);
         setChecked(props.checked);
+        setTasks(props.messageList);
         console.log(tasks);
 
     });
