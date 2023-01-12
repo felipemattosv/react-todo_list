@@ -4,19 +4,19 @@ import React, { useState, useEffect } from 'react'
 
 interface IProps {
     messageList: string[];
+    checked: boolean[];
     onChange: (e: any) => void;
 }
 
-let completedTemp = 0;
-
 export const TasksList: React.FC<IProps> = (props) => {
     
-    const [tasks, setTasks] = useState<String[]>([]);
-    const [completed, setCompleted] = useState(0);
+    const [tasks, setTasks] = useState<string[]>([]);
+    const [checked, setChecked] = useState<boolean[]>([]);
 
     useEffect(() => {
 
         setTasks(props.messageList);
+        setChecked(props.checked);
         console.log(tasks);
 
     });
@@ -28,8 +28,8 @@ export const TasksList: React.FC<IProps> = (props) => {
         spacing={0}
         align='stretch'
         >
-           {tasks.map((task,index) => {
-                    return <Task name={task} key={ index } id = { "check"+index.toString() } onChange = { props.onChange } />
+           {tasks.map((task, index) => {
+                    return <Task name={task} key={ task } id = { "check"+index.toString() } onChange = { props.onChange } check={checked[index]}/>
                 })}
         
         </VStack>

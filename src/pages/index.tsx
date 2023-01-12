@@ -6,23 +6,27 @@ import { TasksList } from "../components/TasksList"
 import { Footer } from "../components/Footer";
 import React, { useState } from 'react'
 
-const messages: string[] = [];
+const messagesTotal: string[] = [];
+let messagesChecked: string[] = [];
+let messagesUnchecked: string[] = [];
+let checked: boolean[] = [];
 
 
 const Home: NextPage = () => {
 
-  const [msgUpdate,setMsg] = useState('');
+  const [msgUpdate,setMsg] = useState<string[]>([]);
   const [completed, setCompleted] = useState(0);
+  const [checkedFinal, setChecked] = useState<boolean[]>([]);
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => { //Verifica quando o teclado é clicado para fazer a inserção da task
+  const handleKeyDown = (event: React.KeyboardEvent) => { //Verifica quando o teclado é clicado para fazer a inserção da task
       if (event.key === 'Enter') {
 
           let msg = (event.target as HTMLInputElement).value;
           
-          setMsg(msg);
-
           if (msg !== "") {
-            messages.push(msg);
+            messagesTotal.push(msg);
+            messagesUnchecked.push(msg);
+            setMsg(messagesTotal);
             setCompleted(completed+1);
           }
       }
@@ -30,19 +34,77 @@ const Home: NextPage = () => {
 
   const handleChange = () => { // Evento onChange verifica quando o checkbox é alterado
       let completedTemp = 0;
+      messagesChecked = [];
+      messagesUnchecked = [];
+      checked = [];
 
-      for(let i = 0; i < messages.length; i++){
-          const check =  document.getElementById("check"+i.toString()) as HTMLInputElement | null;
-          if(!check?.checked){
+      for(let i = 0; i < messagesTotal.length; i++){
+
+          const check =  document.getElementById("check"+i.toString()) as HTMLInputElement;
+          
+          if(!check.checked){
               completedTemp+=1;
+              messagesUnchecked.push(check.value);
+              checked.push(false);
+          }else{
+              messagesChecked.push(check.value);
+              checked.push(true);
           }
       }
-      
+      setChecked(checked);
       setCompleted(completedTemp);
       console.log(completedTemp);
+      console.log(messagesChecked);
+      console.log(messagesUnchecked);
 
   } //Fim da verificação da CheckBox
 
+  const handleClick = (event: React.PointerEvent) => {
+    let targetBtn = (event.target as HTMLButtonElement).id;
+    if(targetBtn==="allBtn"){
+      setMsg(messagesTotal);
+      checked = [];
+
+      for(let i = 0; i < messagesTotal.length; i++){
+        if(messagesUnchecked.includes(messagesTotal[i])){
+          checked.push(false);
+        }else{
+          checked.push(true);
+        }
+      }
+      setChecked(checked);
+
+    }else if(targetBtn==="activeBtn"){
+
+      setMsg(messagesUnchecked);
+      checked = [];
+
+      for(let i = 0; i < messagesUnchecked.length; i++){
+        checked.push(false);
+      }
+      setChecked(checked);
+
+    }else if(targetBtn==="completedBtn"){
+      setMsg(messagesChecked);
+      checked = [];
+      
+      for(let i = 0; i < messagesChecked.length; i++){
+        checked.push(true);
+      }
+      setChecked(checked);
+
+    }else if(targetBtn==="clearBtn"){
+      messagesUnchecked = messagesTotal;
+      messagesChecked = [];
+      setMsg(messagesTotal)
+      checked = [];
+      
+      for(let i = 0; i < messagesTotal.length; i++){
+        checked.push(false);
+      }
+      setChecked(checked);
+    }
+  }
     
 
   return (
@@ -50,8 +112,8 @@ const Home: NextPage = () => {
       <Flex width="100%" maxWidth={360} direction="column">
         <Header />
         <NewTask onKeyDown={ handleKeyDown }/>
-        <TasksList onChange = { handleChange } messageList={ messages }/>
-        <Footer itemsLeft = { completed } />
+        <TasksList onChange = { handleChange } messageList={ msgUpdate } checked={ checkedFinal }/>
+        <Footer buttons={ handleClick } itemsLeft = { completed } />
       </Flex>
     </Flex>
   );
