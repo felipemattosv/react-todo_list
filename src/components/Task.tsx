@@ -17,7 +17,7 @@ export function Task(props: TaskProps) {
         id = {props.id}
         onChange={ props.onChange }
         value = {props.name}
-        defaultChecked = { props.check }
+        isChecked = { props.check }
         >
             {props.name}
         </Checkbox>

@@ -8,17 +8,27 @@ interface IProps {
     onChange: (e: any) => void;
 }
 
+interface Task {
+    taskName: string;
+    isChecked: boolean;
+}
+
 export const TasksList: React.FC<IProps> = (props) => {
     
-    const [tasks, setTasks] = useState<string[]>([]);
-    const [checked, setChecked] = useState<boolean[]>([]);
+    const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
 
-        setChecked(props.checked);
-        setTasks(props.messageList);
+        let tasksTemp:Task[] = [];
+
+        for (let i=0; i < props.messageList.length; i++) {
+
+            tasksTemp.push({"taskName": props.messageList[i], "isChecked": props.checked[i]});
+        }
+        
         console.log(tasks);
 
+        setTasks(tasksTemp);
     });
 
     
@@ -29,7 +39,7 @@ export const TasksList: React.FC<IProps> = (props) => {
         align='stretch'
         >
            {tasks.map((task, index) => {
-                    return <Task name={task} key={ task } id = { "check"+index.toString() } onChange = { props.onChange } check={checked[index]}/>
+                    return <Task name={task.taskName} key={ task.taskName } id = { "check"+index.toString() } onChange = { props.onChange } check={task.isChecked}/>
                 })}
         
         </VStack>
