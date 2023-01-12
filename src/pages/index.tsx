@@ -11,9 +11,20 @@ let messagesChecked: string[] = [];
 let messagesUnchecked: string[] = [];
 let checked: boolean[] = [];
 
+function checkingBox(uncheckedTemp: string[]){ //Função para realizar a verificação de quais estão marcados e quais não estão
+  let checkedTemp = []; 
+  for(let i = 0; i < messagesTotal.length; i++){
+    if(uncheckedTemp.includes(messagesTotal[i])){
+      checkedTemp.push(false);
+    }else{
+      checkedTemp.push(true);
+    }
+  }
+  return checkedTemp;
+}
 
 const Home: NextPage = () => {
-
+  
   const [msgUpdate,setMsg] = useState<string[]>([]);
   const [completed, setCompleted] = useState(0);
   const [checkedFinal, setChecked] = useState<boolean[]>([]);
@@ -24,9 +35,8 @@ const Home: NextPage = () => {
           let msg = (event.target as HTMLInputElement).value;
           
           if (msg !== "" && !msgUpdate.includes(msg)) {
-            
+            checked = checkingBox(messagesUnchecked);
             checked.push(false);
-            
             messagesTotal.push(msg);
             messagesUnchecked.push(msg);
             setMsg(messagesTotal);
@@ -67,15 +77,9 @@ const Home: NextPage = () => {
     let targetBtn = (event.target as HTMLButtonElement).id;
     if(targetBtn==="allBtn"){ //Verificação se o botão "All" foi clicado
       setMsg(messagesTotal);
-      checked = [];
 
-      for(let i = 0; i < messagesTotal.length; i++){
-        if(messagesUnchecked.includes(messagesTotal[i])){
-          checked.push(false);
-        }else{
-          checked.push(true);
-        }
-      }
+      checked = checkingBox(messagesUnchecked);
+      
       setChecked(checked);
 
     }else if(targetBtn==="activeBtn"){ //Verificação se o botão "Active" foi clicado
