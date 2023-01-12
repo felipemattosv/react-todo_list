@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 
           let msg = (event.target as HTMLInputElement).value;
           
-          if (msg !== "") {
+          if (msg !== "" && !msgUpdate.includes(msg)) {
             messagesTotal.push(msg);
             messagesUnchecked.push(msg);
             setMsg(messagesTotal);
